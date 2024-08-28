@@ -26,7 +26,7 @@ public class GameService {
 
 	@Cacheable(value = "gameStatisticCache", key = "#userId")
 	public GameStatistic startGame(String userId) {
-		log.info("startGame ");
+	    log.debug("startGame ");
 
 		return getFromDB(userId);
 
@@ -34,7 +34,7 @@ public class GameService {
 
 	@Cacheable(value = "gameStatisticCache", key = "#userId")
 	public GameStatistic getStatistics(String userId) {
-		log.info("getStatistics ");
+		log.debug("getStatistics ");
 		return getFromDB(userId);
 		
 	}
@@ -46,7 +46,7 @@ public class GameService {
 			Statistics statistic = new Statistics();
 			statistic.setId(userId);
 			gameStatisticsRepository.save(statistic);
-			log.info("getStatistics from db");
+			log.debug("getStatistics from db");
 			return new GameStatistic();
 		} else
 			return converToGameStatistics(statistics.get());
@@ -68,7 +68,7 @@ public class GameService {
 
 		Result result = determineResult(userMove, computerMove);
 		
-		log.info("makeMove {} ", result);
+		log.debug("makeMove {} ", result);
 	
 		return new GameResult(userMove, computerMove, result);
 	}
